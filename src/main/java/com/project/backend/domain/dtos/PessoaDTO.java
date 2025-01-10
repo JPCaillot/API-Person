@@ -1,0 +1,23 @@
+package com.project.backend.domain.dtos;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
+
+import java.time.LocalDate;
+
+@Data
+@NoArgsConstructor
+public class PessoaDTO {
+    private Integer idPessoa;
+    @NotBlank(message = "O nome não pode estar vazio")
+    private String nome;
+    @NotBlank(message = "CPF é um campo obrigatório")
+    @Length(min = 11, max = 11)
+    private String cpf;
+    @Past(message = "A data de nascimento não pode ser maior que a atual")
+    private LocalDate nascimento;
+    private EnderecoDTO endereco;
+}
