@@ -1,1 +1,1 @@
-DB_PASSWORD=postgres;DB_URL=jdbc:postgresql://localhost:5432/backenddatabase;DB_USERNAME=postgres;PORT=8080
+DB_PASSWORD=postgres;DB_URL=jdbc:postgresql://localhost:5432/backenddatabase;DB_USERNAME=postgres;PORT=8080;CORS_ORIGINS=http://localhost:4200
