@@ -14,7 +14,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/backend/pessoa")
-@CrossOrigin(origins = "${cors.origin}")
 @Validated
 public class PessoaController {
     private final IPessoaService pessoaService;
