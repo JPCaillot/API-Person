@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/backend/pessoa")
+@RequestMapping("/pessoas")
 @Validated
 public class PessoaController {
     private final IPessoaService pessoaService;
