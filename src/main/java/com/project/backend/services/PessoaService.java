@@ -1,4 +1,4 @@
-package com.project.backend.service;
+package com.project.backend.services;
 
 import com.project.backend.domain.dtos.PessoaDTO;
 import com.project.backend.domain.validators.PessoaValidator;
@@ -66,7 +66,7 @@ public class PessoaService implements IPessoaService {
     public List<PessoaDTO> listPessoas() {
         List<PessoaDTO> response = new ArrayList<>();
 
-        pessoaRepository.findByIdPessoaNotNullOrderByNomeAsc().
+        pessoaRepository.getAllPessoasOrderedByNomeAsc().
                 forEach(pessoa -> {
                     System.out.println("Mapeando cadastro de " + pessoa.getNome());
                     PessoaDTO pessoaDTO = new PessoaDTO();

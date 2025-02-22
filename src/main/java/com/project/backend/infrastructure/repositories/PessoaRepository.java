@@ -9,7 +9,11 @@ import java.util.List;
 
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
-    List<Pessoa> findByIdPessoaNotNullOrderByNomeAsc();
+    @Query(
+            value = "select p " +
+                    "from Pessoa p " +
+                    "order by p.nome")
+    List<Pessoa> getAllPessoasOrderedByNomeAsc();
 
     @Query(
             value = "SELECT EXISTS (" +

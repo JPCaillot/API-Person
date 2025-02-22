@@ -1,4 +1,4 @@
-package com.project.backend.service;
+package com.project.backend.services;
 
 import com.project.backend.domain.dtos.PessoaDTO;
 import jakarta.validation.Valid;

@@ -1,7 +1,7 @@
 package com.project.backend.controllers;
 
 import com.project.backend.domain.dtos.PessoaDTO;
-import com.project.backend.service.IPessoaService;
+import com.project.backend.services.IPessoaService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;

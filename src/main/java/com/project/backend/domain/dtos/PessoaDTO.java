@@ -2,6 +2,7 @@ package com.project.backend.domain.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PessoaDTO {
     private Integer idPessoa;
     @NotBlank(message = "O nome não pode estar vazio")
