@@ -6,12 +6,14 @@ import com.project.backend.infrastructure.entities.Endereco;
 import com.project.backend.infrastructure.entities.Pessoa;
 import com.project.backend.infrastructure.repositories.PessoaRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Slf4j
 @Service
 public class PessoaService implements IPessoaService {
     private final PessoaRepository pessoaRepository;
@@ -29,13 +31,13 @@ public class PessoaService implements IPessoaService {
             PessoaValidator.validateNome(nome);
             validateCPFUniqueness(pessoaDTO);
 
-            System.out.println("Criando cadastro de pessoa com nome: " + pessoaDTO.getNome());
+            log.info("Criando cadastro de pessoa com nome: {}", pessoaDTO.getNome());
             Pessoa pessoa = new Pessoa();
 
             modelMapper.map(pessoaDTO, pessoa);
             assignEndereco(pessoa);
             pessoaRepository.save(pessoa);
-            System.out.println("Criação de cadastro para " + pessoa.getNome() + " completa");
+            log.info("Criação de cadastro para {} completa", pessoa.getNome());
 
             modelMapper.map(pessoa, pessoaDTO);
         } else {
@@ -57,7 +59,7 @@ public class PessoaService implements IPessoaService {
         assignEndereco(pessoa);
 
         pessoaRepository.save(pessoa);
-        System.out.println("Atualização de cadastro para " + pessoa.getNome() + " completa");
+        log.info("Atualização de cadastro para {} completa", pessoa.getNome());
         modelMapper.map(pessoa, pessoaDTO);
         return pessoaDTO;
     }
@@ -68,12 +70,12 @@ public class PessoaService implements IPessoaService {
 
         pessoaRepository.getAllPessoasOrderedByNomeAsc().
                 forEach(pessoa -> {
-                    System.out.println("Mapeando cadastro de " + pessoa.getNome());
+                    log.info("Mapeando cadastro de {}", pessoa.getNome());
                     PessoaDTO pessoaDTO = new PessoaDTO();
                     modelMapper.map(pessoa, pessoaDTO);
                     response.add(pessoaDTO);
                 });
-        System.out.println(response.size() + " cadastros encontrados.");
+        log.info("{} cadastros encontrados", response.size());
         return response;
     }
 
@@ -81,7 +83,7 @@ public class PessoaService implements IPessoaService {
     @Transactional
     public void deletePessoa(Integer idPessoa) {
         pessoaRepository.deleteById(idPessoa);
-        System.out.println("Cadastro de id " + idPessoa + " deletado com sucesso");
+        log.info("Cadastro de id {} deletado com sucesso", idPessoa);
     }
 
     @Override
@@ -100,20 +102,20 @@ public class PessoaService implements IPessoaService {
 
     private void validateCPFUniqueness(PessoaDTO pessoaDTO) {
         String nome = pessoaDTO.getNome();
-        System.out.println("Validando CPF de " + nome);
+        log.info("Validando CPF de {}", nome);
         if (pessoaRepository.existsByCpfAndDifferentId(pessoaDTO.getCpf(), pessoaDTO.getIdPessoa())) {
             throw new IllegalArgumentException("CPF já presente em outro cadastro");
         }
-        System.out.println("Validação dos dados de " + nome + " completa!");
+        log.info("Validação dos dados de {} completa!", nome);
     }
 
     private Pessoa retrievePessoa(PessoaDTO pessoaDTO) {
         Pessoa pessoa;
         if (Objects.nonNull(pessoaDTO.getIdPessoa())) {
-            System.out.println("Atualizando cadastro de pessoa com nome: " + pessoaDTO.getNome());
+            log.info("Atualizando cadastro de pessoa com nome: {}", pessoaDTO.getNome());
             pessoa = pessoaRepository.findById(pessoaDTO.getIdPessoa())
                     .orElseThrow(() -> new ObjectNotFoundException(Pessoa.class.getName(), pessoaDTO.getIdPessoa()));
-            System.out.println("Cadastro encontrado, atualizando...");
+            log.info("Cadastro encontrado, atualizando...");
         } else {
             throw new IllegalArgumentException("idPessoa não pode ser nulo para atualização de cadastro");
         }
