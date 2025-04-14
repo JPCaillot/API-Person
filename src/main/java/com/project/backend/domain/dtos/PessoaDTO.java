@@ -1,6 +1,8 @@
 package com.project.backend.domain.dtos;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +21,9 @@ public class PessoaDTO {
     @NotBlank(message = "CPF é um campo obrigatório")
     @Length(min = 11, max = 11)
     private String cpf;
+    @NotNull
     @Past(message = "A data de nascimento não pode ser maior que a atual")
     private LocalDate nascimento;
+    @Valid
     private EnderecoDTO endereco;
 }
