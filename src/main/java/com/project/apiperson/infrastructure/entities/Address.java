@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name = "tb_address", schema = "person")
 @Getter
 @Setter
 public class Address {
