@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddressDTO {
-    @NotNull(message = "CEP is a required field")
+    @NotNull(message = "Postal Code is a required field")
     private Integer postalCode;
     @NotBlank(message = "Street is a required field")
     private String street;

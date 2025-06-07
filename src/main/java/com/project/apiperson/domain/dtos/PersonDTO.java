@@ -18,7 +18,7 @@ public class PersonDTO {
     private Integer personId;
     @NotBlank(message = "The name can't be empty")
     private String name;
-    @NotBlank(message = "CPF is a required field")
+    @NotBlank(message = "Document Number is a required field")
     @Length(min = 11, max = 11)
     private String documentNumber;
     @NotNull

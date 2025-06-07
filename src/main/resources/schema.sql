@@ -16,6 +16,6 @@ CREATE TABLE IF NOT EXISTS person.tb_address (
     state VARCHAR(100),
     CONSTRAINT fk_person_address
         FOREIGN KEY (person_id)
-        REFERENCES person.person(person_id)
+        REFERENCES person.tb_person(person_id)
         ON DELETE CASCADE
 );
